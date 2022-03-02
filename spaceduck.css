@@ -9,3 +9,11 @@ p {
 #comic {
 	background-color: darkblue;
 }
+
+#duck {
+	position: relative;
+}
+
+#panel2 {
+	background-image: url("space.jpg");
+}
