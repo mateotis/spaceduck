@@ -10,11 +10,18 @@ p {
 	background-color: darkblue;
 }
 
-#duck {
+#duck2 {
 	position: absolute;
 	top: 0;
     bottom: 0;
     margin: auto;
+}
+
+#duck3 {
+	transition-duration: 2000ms;
+    transition-timing-function: ease-out;
+    position: fixed;
+    transform: translate(-10%, -10%);
 }
 
 .duck-diag {
@@ -28,7 +35,7 @@ p {
 	text-align: center;
 }
 
-#panel2 {
+.panel {
 	position: relative;
 	width: 100%;
 	height: 200px;
