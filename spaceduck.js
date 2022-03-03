@@ -34,9 +34,21 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$(document).on('mousemove', (event) => {
-		$('#duck3').css({
-			left: event.clientX,
-			top: event.clientY,
-		});
+		let offset = $("#panel3").offset();
+		let panelHeight = $("#panel3").height();
+		let duckHeight = $("#duck3").height();
+		let panelWidth = $("#panel3").width();
+		let duckWidth = $("#duck3").width();
+		console.log(panelHeight);
+		console.log("Offset left/top: " + offset.left + " " + offset.top);
+		console.log("Event left/top: " + event.clientX + " " + event.clientY);
+		if(event.clientX < (panelWidth - duckWidth) && offset.top < event.clientY && event.clientY < (offset.top + panelHeight - duckHeight)) {
+			console.log("Changing position");
+			$('#duck3').css({
+				left: event.clientX,
+				top: event.clientY,
+			});
+		}
+
 	});
 });
