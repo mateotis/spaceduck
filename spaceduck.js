@@ -52,3 +52,67 @@ $(document).ready(function() {
 
 	});
 });
+
+// here i'll add the eventlistener for the space duck, it'll attempt to move the viewer to the next panel.
+// i might start with the chaning function instead of an event eventlistener , just to test it out.
+
+// CHANING
+// $(document).ready(function(){
+//   $("#MTP0").click(function(){
+//     $("#panel1").css("color", "yellow").slideUp(2000);
+//     $("#panel2").css("color", "yellow").slideDown(3000);
+//   });
+// });
+
+// $(document).ready(function(){
+//   $("#MTP12").click(function(){
+//     $("#panel2,#panel3").css("color", "yellow").slideUp(2000);
+//     $("#panel4").css("color", "yellow").slideDown(3000);
+//   });
+// });
+
+
+// FADE IN AND OUT (Worked)
+
+$(document).ready(function(){
+  $("#MTP0").click(function(){
+    $("#panel1").fadeOut();
+    $("#panel2").fadeIn();
+    $("#panel3").fadeIn();
+    $("#panel4").fadeOut();
+  });
+});
+
+$(document).ready(function(){
+  $("#MTP12").click(function(){
+    $("#panel1").fadeOut();
+    $("#panel2").fadeOut();
+    $("#panel3").fadeOut();
+    $("#panel4").fadeIn();
+  });
+});
+
+
+// HIDE/SHOW (Sorta worked)
+
+// $(document).ready(function(){
+//   $("#MTP0").click(function(){
+//     $("#panel4").hide();
+//     $("#panel1").hide();
+//   });
+//   $("#show").click(function(){
+//     $("#panel2").show();
+//       $("#panel3").show();
+//   });
+// });
+//
+// $(document).ready(function(){
+//   $("#MTP12").click(function(){
+//     $("#panel1").hide();
+//     $("#panel2").hide();
+//     $("#panel3").hide();
+//   });
+//   $("#show").click(function(){
+//     $("#panel4").show();
+//   });
+// });

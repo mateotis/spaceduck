@@ -6,18 +6,41 @@
 		<title>Space Duck</title>
 		<link rel="stylesheet" type="text/css" href="spaceduck.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src = "spaceduck.js" defer></script>
 	</head>
 	<body>
+		<!--i messed around with panel1's div, i added a div for the space duck text so the text can have it's own background  -->
+
 		<div id = "comic">
-			<div class = "panel" id = "panel1"><p>Title</p></div>
+			<div class = "intro" id = "panel1">
+<div id="textbackground">
+			<h1>SPACE DUCK</h1>
+		</div>
+	<button id="MTP0">Let's Begin</button>
+</div> <br><br><br>
+
+			<!--panel 2 -->
+
 			<div class = "panel" id = "panel2">
 				<p class = "duck-diag" id = "panel2-diag1">Computer, how long have I been away from home?</p>
 				<p class = "ai-diag" id = "panel2-diag2">257 days and 12 hours.</p>
 				<img class = "duck" id = "duck2" src = "duck.png" width = "200px" height = "100px">
-			</div>
-			<div class = "panel" id = "panel3"><p>Flashback stars</p></div>
-			<div class = "panel" id = "panel4"><p>Dodging asteroids</p></div>
+			</div><br><br><br>
+
+<!--panel 3 -->
+			<div class = "panel" id = "panel3"><p>Flashback stars</p>
+				<button id="MTP12">next</button>
+			</div>	<br><br><br>
+
+
+<!--panel 4 -->
+
+			<div class = "panel" id = "panel4"><p>Dodging asteroids</p>
+				<button id="MTP3" >next</button>
+			</div>	</div><br><br><br>
+
+
 		</div>
 	</body>
 </html>
