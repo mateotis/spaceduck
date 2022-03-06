@@ -28,7 +28,7 @@ $(document).ready(function() {
 			$("#panel2").hide();
 			$("#panel3").show();
 			//$("#duck2").remove();
-			$("#panel3").append("<img class = 'duck' id = 'duck3' src = 'duck.png' width = '200' height = '100'>")
+			//$("#panel3").append("<img class = 'duck' id = 'duck3' src = 'duck.png' width = '200' height = '100'>")
 			currentPanel = 3;
 		}
 	});
@@ -41,11 +41,7 @@ $(document).ready(function() {
 		let duckHeight = $("#duck3").height();
 		let panelWidth = $("#panel3").width();
 		let duckWidth = $("#duck3").width();
-		console.log(panelHeight);
-		console.log("Offset left/top: " + offset.left + " " + offset.top);
-		console.log("Event left/top: " + event.clientX + " " + event.clientY);
 		if(event.clientX < (panelWidth - duckWidth) && offset.top < event.clientY && event.clientY < (offset.top + panelHeight - duckHeight)) {
-			console.log("Changing position");
 			$('#duck3').css({
 				left: event.clientX,
 				top: event.clientY,
@@ -54,6 +50,33 @@ $(document).ready(function() {
 
 	});
 });
+
+$(document).ready(function() {
+	$(document).on('mousemove', (event) => {
+		let offset = $("#flashback1").offset();
+		let fbHeight = $("#flashback1").height();
+		let fbWidth = $("#flashback1").width();
+
+		console.log(event.clientX, event.clientY);
+		console.log("Offset:", offset, "Height:", fbHeight, "Width:", fbWidth);
+
+		if(offset.left < event.clientX && event.clientX < (offset.left + fbWidth) && offset.top < event.clientY && event.clientY < (offset.top + fbHeight)) {
+			console.log("in range!");
+			$('#fb-img1').fadeIn();
+		}
+		else {
+			$('#fb-img1').fadeOut();
+		}
+	});
+});
+
+// $(document).ready(function(){
+// 	$("#flashback1").hover(function(){
+// 		$("#fb-img1").fadeIn();
+// 		}, function(){
+// 		$("#fb-img1").fadeOut();
+// 	});
+// });
 
 // here i'll add the eventlistener for the space duck, it'll attempt to move the viewer to the next panel.
 // i might start with the chaning function instead of an event eventlistener , just to test it out.
@@ -120,7 +143,7 @@ $(document).ready(function() {
 // });
 
 $(document).ready(function() {
-	$("#MTP0").click(function() {
+	$("#title-screen").click(function() {
 		$("#panel1").hide();
 		$("#panel2").show();
 	});

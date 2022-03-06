@@ -1,5 +1,8 @@
 body {
 	background-color: black;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
 }
 
 p {
@@ -14,6 +17,10 @@ p {
 
 .duck {
 	padding: 0;
+	margin: 0;
+	vertical-align: top;
+	width: 150px;
+	height: 150px;
 }
 
 #duck2 {
@@ -44,21 +51,52 @@ p {
 .panel {
 	position: relative;
 	width: 100%;
-	height: 200px;
-	border-style: solid;
+	height: 100vh;
+	overflow: hidden;
+	/*border-style: solid;*/
 	background-image: url("space.jpg");
 
 	display: none;
 }
+
 #panel1 {
 	position: relative;
 	width: 100%;
-	height: 200px;
 	border-style: solid;
-	background-image: url("space.jpg");
 
 	display: block;
 }
+
+.flashbacks {
+	display: flex;
+	margin: auto;
+	justify-content: space-between;
+	align-items: center;
+	width: 80%;
+}
+
+.flashback {
+	width: 100px;
+	height: 100px;
+	background-color: red;
+}
+
+.fb-img {
+	display: none;
+	width: 33vw;
+	height: 50vh;
+	/* Magic! */
+	max-width: 33vw;
+}
+
+/*.flashback:hover {
+	background-color: blue;
+}
+
+.flashback:hover:after {
+	content: url(duck.png);
+
+} */
 
 /* meera*/
 
@@ -75,10 +113,15 @@ color: #F28C28 ;
 
 }
 /*As for position u used a div i made on html called text background */
-#textbackground{
+#title-screen {
+	display: flex;
+    justify-content: center;
+    align-items: center;
 	background: darkblue;
 	margin: auto;
-    width: 50%;
+	margin-top: 15%;
+    width: 25%;
+	height: 25%;
 
 }
 /* THESE ARE FOR THE BUTTONS, it's the positionof each button <3*/
