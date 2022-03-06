@@ -25,7 +25,9 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$(document).click(function() {
 		if(finishedPanel == 2 && currentPanel == 2) {
-			$("#duck2").remove();
+			$("#panel2").hide();
+			$("#panel3").show();
+			//$("#duck2").remove();
 			$("#panel3").append("<img class = 'duck' id = 'duck3' src = 'duck.png' width = '200' height = '100'>")
 			currentPanel = 3;
 		}
@@ -74,23 +76,23 @@ $(document).ready(function() {
 
 // FADE IN AND OUT (Worked)
 
-$(document).ready(function(){
-  $("#MTP0").click(function(){
-    $("#panel1").fadeOut();
-    $("#panel2").fadeIn();
-    $("#panel3").fadeIn();
-    $("#panel4").fadeOut();
-  });
-});
-
-$(document).ready(function(){
-  $("#MTP12").click(function(){
-    $("#panel1").fadeOut();
-    $("#panel2").fadeOut();
-    $("#panel3").fadeOut();
-    $("#panel4").fadeIn();
-  });
-});
+// $(document).ready(function(){
+//   $("#MTP0").click(function(){
+//     $("#panel1").fadeOut();
+//     $("#panel2").fadeIn();
+//     $("#panel3").fadeIn();
+//     $("#panel4").fadeOut();
+//   });
+// });
+//
+// $(document).ready(function(){
+//   $("#MTP12").click(function(){
+//     $("#panel1").fadeOut();
+//     $("#panel2").fadeOut();
+//     $("#panel3").fadeOut();
+//     $("#panel4").fadeIn();
+//   });
+// });
 
 
 // HIDE/SHOW (Sorta worked)
@@ -116,3 +118,10 @@ $(document).ready(function(){
 //     $("#panel4").show();
 //   });
 // });
+
+$(document).ready(function() {
+	$("#MTP0").click(function() {
+		$("#panel1").hide();
+		$("#panel2").show();
+	});
+});
