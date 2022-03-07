@@ -20,7 +20,7 @@ $(document).ready(function() { // Once we're on panel 2, run duck floating anima
 		console.log(finishedPanel, currentPanel);
 		if(finishedPanel == 1 && currentPanel == 1) {
 			currentPanel = 2;
-		    $("#duck2").animate({left: "40%"}, 10000, "linear", function() {
+		    $("#duck2").animate({left: "40%"}, 1000, "linear", function() {
 				console.log("in here");
 				$('#panel2-diag1').fadeIn();
 				currentDiagLine = 1; // Enable advancing the dialogue only after the first line has appeared
@@ -35,10 +35,11 @@ $(document).ready(function() { // Once we're on panel 2, run duck floating anima
 $(document).ready(function() { // Transition between panels
 	$(document).click(function() {
 		if(finishedPanel == 2 && currentPanel == 2) {
-			$("#panel2").hide();
-			$("#panel3").show();
 			currentPanel = 3;
-			console.log('trans to panel3');
+			$("#panel2").fadeOut(function() {
+				$("#panel3").show();
+				console.log('trans to panel3');
+			});
 		}
 		else if(finishedPanel == 3 && currentPanel == 3) {
 			$("#panel3").hide();
