@@ -103,19 +103,44 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$(document).on('mousemove', (event) => {
-		let offset = $("#flashback1").offset();
-		let fbHeight = $("#flashback1").height();
-		let fbWidth = $("#flashback1").width();
+		let offset1 = $("#flashback1").offset();
+		let fbHeight1 = $("#flashback1").height();
+		let fbWidth1 = $("#flashback1").width();
+
+		let offset2 = $("#flashback2").offset();
+		let fbHeight2 = $("#flashback2").height();
+		let fbWidth2 = $("#flashback2").width();
+
+		let offset3 = $("#flashback3").offset();
+		let fbHeight3 = $("#flashback3").height();
+		let fbWidth3 = $("#flashback3").width();
 
 		//console.log(event.clientX, event.clientY);
 		//console.log("Offset:", offset, "Height:", fbHeight, "Width:", fbWidth);
 
-		if(offset.left < event.clientX && event.clientX < (offset.left + fbWidth) && offset.top < event.clientY && event.clientY < (offset.top + fbHeight)) {
+		if(offset1.left < event.clientX && event.clientX < (offset1.left + fbWidth1) && offset1.top < event.clientY && event.clientY < (offset1.top + fbHeight1)) {
 			console.log("in range!");
-			$('#fb-img1').fadeIn();
+			$('#fb-img1').css("opacity","1");
 		}
 		else {
-			$('#fb-img1').fadeOut();
+			$('#fb-img1').css("opacity", "0");
+		}
+
+		if(offset2.left < event.clientX && event.clientX < (offset2.left + fbWidth2) && offset2.top < event.clientY && event.clientY < (offset2.top + fbHeight2)) {
+			console.log("in range!");
+			$('#fb-img2').css("opacity","1");
+		}
+		else {
+			$('#fb-img2').css("opacity","0");
+			//$('#fb-img2').fadeOut();
+		}
+
+		if(offset3.left < event.clientX && event.clientX < (offset3.left + fbWidth3) && offset3.top < event.clientY && event.clientY < (offset3.top + fbHeight3)) {
+			console.log("in range!");
+			$('#fb-img3').css("opacity","1");
+		}
+		else {
+			$('#fb-img3').css("opacity","0");
 		}
 	});
 });

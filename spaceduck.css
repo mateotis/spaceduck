@@ -9,17 +9,22 @@ p {
 	color: white;
 	font-size: 20px;
 }
-#title-screen {
-	width: 50vw;
 
+h1 {
+	color: #F28C28;
+	text-align: center;
 }
 
-/* #clicktobegin {
-	transition-duration: 2000ms;
-    transition-timing-function: ease-in;
+#title-screen {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	margin: auto;
+	margin-top: 15%;
+    width: 25%;
+	height: 25%;
 
-} */
-
+}
 
 #comic {
 	background-color: darkblue;
@@ -64,7 +69,6 @@ p {
 	width: 100%;
 	height: 100vh;
 	overflow: hidden;
-	/*border-style: solid;*/
 	background-image: url("space.jpg");
 
 	display: none;
@@ -83,7 +87,8 @@ p {
 	margin: auto;
 	justify-content: space-between;
 	align-items: center;
-	width: 80%;
+	width: 100%;
+	height: 100%;
 }
 
 .flashback {
@@ -110,67 +115,16 @@ p {
 	object-fit: contain;
 }
 
-.fb-img {
-	display: none;
-	width: 33vw;
-	height: 50vh;
-	/* Magic! */
-	max-width: 33vw;
-}
-
-/*.flashback:hover {
-	background-color: blue;
-}
-
-.flashback:hover:after {
-	content: url(duck.png);
-
-} */
-
-/* meera*/
-
-/* this Css works on the title panel (panel1) ,i imagined the text space duck to be in the center with orange text.
-we can change it, i'll make my code as clear as possible using these comments <3 */
-
-/*To being i am starting with the title color and position,
-initally space duck was written as a paragraph, i changed it to a heading so i can play around with it's size and color.
-*/
-
-h1{
-color: #F28C28 ;
-  text-align: center;
-
-}
-/*As for position u used a div i made on html called text background */
-#title-screen {
+.fb-images {
+	margin: 0;
 	display: flex;
-    justify-content: center;
-    align-items: center;
-	background: darkblue;
-	margin: auto;
-	margin-top: 15%;
-    width: 25%;
-	height: 25%;
-
-}
-/* THESE ARE FOR THE BUTTONS, it's the positionof each button <3*/
-#MTP0{
-margin-left: 47%;
+	position: absolute;
 }
 
-#MTP1{
-	margin-left: 48%;
-	margin-top: 205px
-}
+.fb-img {
+	flex: 33.33%;
+	opacity: 0;
 
-#MTP12{
-	margin-left: 48%;
-transform: translateY(770%);
+	width: 33vw;
+	height: 100%;
 }
-
-
-#MTP3{
-	margin-left: 48%;
-transform: translateY(770%);
-}
-/* next i want to include the chaining effect for the panels in java */
