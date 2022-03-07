@@ -2,6 +2,14 @@ let nextDiagReady = false;
 let finishedPanel = 0;
 let currentPanel = 2;
 
+
+
+$(document).ready(function() {
+	$("title-screen").click(function() {
+		$("#title-screen").hide();
+	});
+});
+
 $(document).ready(function() {
     $("#duck2").animate({left: "40%"}, 10000, "linear", function() {
 		$('#panel2-diag1').fadeIn();
@@ -22,17 +30,38 @@ $(document).ready(function() {
 	});
 });
 
-$(document).ready(function() {
-	$(document).click(function() {
-		if(finishedPanel == 2 && currentPanel == 2) {
-			$("#panel2").hide();
-			$("#panel3").show();
-			//$("#duck2").remove();
-			//$("#panel3").append("<img class = 'duck' id = 'duck3' src = 'duck.png' width = '200' height = '100'>")
-			currentPanel = 3;
-		}
-	});
-});
+
+if(finishedPanel == 3 && currentPanel == 3) {
+
+  $(document).ready(function() {
+  	$(document).click(function() {
+
+        console.log('trans to panel6');
+  			$("#panel3").hide();
+  			$("#panel6").show();
+  			//$("#duck2").remove();
+  			//$("#panel3").append("<img class = 'duck' id = 'duck3' src = 'duck.png' width = '200' height = '100'>")
+  			currentPanel = 6;
+  	});
+  });
+}
+
+if(finishedPanel == 2 && currentPanel == 2) {
+  $(document).ready(function() {
+  	$(document).click(function() {
+
+        console.log('trans to panel3');
+  			$("#panel2").hide();
+  			$("#panel3").show();
+  			//$("#duck2").remove();
+  			//$("#panel3").append("<img class = 'duck' id = 'duck3' src = 'duck.png' width = '200' height = '100'>")
+  			currentPanel = 3;
+        finishedPanel = 3;
+
+  	});
+  });
+}
+
 
 $(document).ready(function() {
 	$(document).on('mousemove', (event) => {
@@ -57,8 +86,8 @@ $(document).ready(function() {
 		let fbHeight = $("#flashback1").height();
 		let fbWidth = $("#flashback1").width();
 
-		console.log(event.clientX, event.clientY);
-		console.log("Offset:", offset, "Height:", fbHeight, "Width:", fbWidth);
+		//console.log(event.clientX, event.clientY);
+		//console.log("Offset:", offset, "Height:", fbHeight, "Width:", fbWidth);
 
 		if(offset.left < event.clientX && event.clientX < (offset.left + fbWidth) && offset.top < event.clientY && event.clientY < (offset.top + fbHeight)) {
 			console.log("in range!");

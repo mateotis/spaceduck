@@ -7,8 +7,19 @@ body {
 
 p {
 	color: white;
-	font-size: 20px
+	font-size: 20px;
 }
+#title-screen {
+	width: 50vw;
+
+}
+
+/* #clicktobegin {
+	transition-duration: 2000ms;
+    transition-timing-function: ease-in;
+
+} */
+
 
 #comic {
 	background-color: darkblue;
