@@ -1,15 +1,16 @@
 let currentDiagLine = 0;
 let finishedPanel = 0;
 let currentPanel = 1;
-
+let flashbacksSeen = new Array(3).fill(false);
 
 
 $(document).ready(function() { // Click title screen, transition to panel 2
 	$("#title-screen").click(function() {
-		$("#panel1").hide();
-		$("#panel2").show();
 		finishedPanel = 1;
-		console.log("trans to panel2");
+		$("#title-screen").fadeOut(function() {
+			$("#panel1").hide();
+			$("#panel2").show();
+		});
 	});
 });
 
@@ -23,7 +24,7 @@ $(document).ready(function() { // Once we're on panel 2, run duck floating anima
 				console.log("in here");
 				$('#panel2-diag1').fadeIn();
 				currentDiagLine = 1; // Enable advancing the dialogue only after the first line has appeared
-				$("#duck2").animate({left: "85%"}, 11250, "linear"); // These numbers ensure constant speed in both stages (if one changes, the other should too!)
+				$("#duck2").animate({left: "100%"}, 15000, "linear"); // These numbers ensure constant speed in both stages (if one changes, the other should too!)
 			});
 		}
 	});
@@ -39,6 +40,12 @@ $(document).ready(function() { // Transition between panels
 			currentPanel = 3;
 			console.log('trans to panel3');
 		}
+		else if(finishedPanel == 3 && currentPanel == 3) {
+			$("#panel3").hide();
+			$("#panel4").show();
+			currentPanel = 4;
+			console.log('trans to panel4');
+		}
 		else if(finishedPanel == 5 && currentPanel == 5) {
 			console.log('trans to panel6');
 			$("#panel3").hide();
@@ -50,42 +57,33 @@ $(document).ready(function() { // Transition between panels
 
 $(document).ready(function() { // Trigger next line of dialogue
 	$(document).click(function() {
-		if(currentDiagLine == 1) {
-			$("#panel2-diag1").fadeOut(function() {
-				$("#panel2-diag2").fadeIn();
-			});
-			console.log("2nd line appeared");
-			currentDiagLine = 2;
+		if(currentPanel == 2) {
+			if(currentDiagLine == 1) {
+				$("#panel2-diag1").fadeOut(function() {
+					$("#panel2-diag2").fadeIn();
+				});
+				currentDiagLine = 2;
+			}
+			else if(currentDiagLine == 2) {
+				$("#panel2-diag2").fadeOut(function() {
+					$("#panel2-diag3").fadeIn();
+				});
+				finishedPanel = 2;
+				currentDiagLine = 3;
+			}
 		}
-		else if(currentDiagLine == 2) {
-			$("#panel2-diag2").fadeOut(function() {
-				$("#panel2-diag3").fadeIn();
-			});
-			console.log("3rd line appeared");
-			finishedPanel = 2;
-			currentDiagLine = 3;
-		}
+		// else if(currentPanel == 3) {
+		// 	if(currentDiagLine == 3) {
+		// 		$("#panel3-diag1").fadeIn();
+		// 		currentDiagLine = 4;
+		// 	}
+		// }
+
 	});
 });
 
-
-
-
-
-// $(document).ready(function() {
-// 	$(document).click(function() {
-// 		if(finishedPanel == 5 && currentPanel == 5) {
-// 			console.log('trans to panel6');
-// 			$("#panel3").hide();
-// 			$("#panel6").show();
-// 			currentPanel = 6;
-// 		}
-// 	});
-// });
-
-
 $(document).ready(function() {
-	$(document).on('mousemove', (event) => {
+	$(document).on('mousemove', (event) => { // Making the duck follow our cursor (within bounds)
 		let offset = $("#panel3").offset();
 		let panelHeight = $("#panel3").height();
 		let duckHeight = $("#duck3").height();
@@ -102,7 +100,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	$(document).on('mousemove', (event) => {
+	$(document).on('mousemove', (event) => { // Flashback hitbox tracking, making them appear/disappear
 		let offset1 = $("#flashback1").offset();
 		let fbHeight1 = $("#flashback1").height();
 		let fbWidth1 = $("#flashback1").width();
@@ -119,16 +117,16 @@ $(document).ready(function() {
 		//console.log("Offset:", offset, "Height:", fbHeight, "Width:", fbWidth);
 
 		if(offset1.left < event.clientX && event.clientX < (offset1.left + fbWidth1) && offset1.top < event.clientY && event.clientY < (offset1.top + fbHeight1)) {
-			console.log("in range!");
-			$('#fb-img1').css("opacity","1");
+			flashbacksSeen[0] = true; // Track which flashbacks we've visited
+			$('#fb-img1').css("opacity","0.8");
 		}
 		else {
 			$('#fb-img1').css("opacity", "0");
 		}
 
 		if(offset2.left < event.clientX && event.clientX < (offset2.left + fbWidth2) && offset2.top < event.clientY && event.clientY < (offset2.top + fbHeight2)) {
-			console.log("in range!");
-			$('#fb-img2').css("opacity","1");
+			flashbacksSeen[1] = true;
+			$('#fb-img2').css("opacity","0.8");
 		}
 		else {
 			$('#fb-img2').css("opacity","0");
@@ -136,83 +134,18 @@ $(document).ready(function() {
 		}
 
 		if(offset3.left < event.clientX && event.clientX < (offset3.left + fbWidth3) && offset3.top < event.clientY && event.clientY < (offset3.top + fbHeight3)) {
-			console.log("in range!");
-			$('#fb-img3').css("opacity","1");
+			flashbacksSeen[2] = true;
+			$('#fb-img3').css("opacity","0.8");
 		}
 		else {
 			$('#fb-img3').css("opacity","0");
 		}
+
+		let progCheck = flashbacksSeen.every(Boolean); // Fancy JS syntax to check whether all elements in the list are true - if they are, we've seen every flashback at least once
+		if(progCheck == true) {
+			finishedPanel = 3; // Which means we're done with this panel!
+			$("#panel3-diag1").fadeIn();
+			currentDiagLine = 4;
+		}
 	});
 });
-
-// $(document).ready(function(){
-// 	$("#flashback1").hover(function(){
-// 		$("#fb-img1").fadeIn();
-// 		}, function(){
-// 		$("#fb-img1").fadeOut();
-// 	});
-// });
-
-// here i'll add the eventlistener for the space duck, it'll attempt to move the viewer to the next panel.
-// i might start with the chaning function instead of an event eventlistener , just to test it out.
-
-// CHANING
-// $(document).ready(function(){
-//   $("#MTP0").click(function(){
-//     $("#panel1").css("color", "yellow").slideUp(2000);
-//     $("#panel2").css("color", "yellow").slideDown(3000);
-//   });
-// });
-
-// $(document).ready(function(){
-//   $("#MTP12").click(function(){
-//     $("#panel2,#panel3").css("color", "yellow").slideUp(2000);
-//     $("#panel4").css("color", "yellow").slideDown(3000);
-//   });
-// });
-
-
-// FADE IN AND OUT (Worked)
-
-// $(document).ready(function(){
-//   $("#MTP0").click(function(){
-//     $("#panel1").fadeOut();
-//     $("#panel2").fadeIn();
-//     $("#panel3").fadeIn();
-//     $("#panel4").fadeOut();
-//   });
-// });
-//
-// $(document).ready(function(){
-//   $("#MTP12").click(function(){
-//     $("#panel1").fadeOut();
-//     $("#panel2").fadeOut();
-//     $("#panel3").fadeOut();
-//     $("#panel4").fadeIn();
-//   });
-// });
-
-
-// HIDE/SHOW (Sorta worked)
-
-// $(document).ready(function(){
-//   $("#MTP0").click(function(){
-//     $("#panel4").hide();
-//     $("#panel1").hide();
-//   });
-//   $("#show").click(function(){
-//     $("#panel2").show();
-//       $("#panel3").show();
-//   });
-// });
-//
-// $(document).ready(function(){
-//   $("#MTP12").click(function(){
-//     $("#panel1").hide();
-//     $("#panel2").hide();
-//     $("#panel3").hide();
-//   });
-//   $("#show").click(function(){
-//     $("#panel4").show();
-//   });
-// });

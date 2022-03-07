@@ -7,7 +7,7 @@ body {
 
 p {
 	color: white;
-	font-size: 20px;
+	font-size: 1.5em;
 }
 
 h1 {
@@ -21,13 +21,13 @@ h1 {
     align-items: center;
 	margin: auto;
 	margin-top: 15%;
-    width: 25%;
-	height: 25%;
+    width: 40%;
+	height: 40%;
 
 }
 
 #comic {
-	background-color: darkblue;
+	background-color: black;
 
 }
 
@@ -53,15 +53,24 @@ h1 {
     transform: translate(-10%, -10%);
 }
 
-.duck-diag {
-	display: none;
+.diag {
+	position: absolute;
+	width: 100%;
+	left: 0px;
 	text-align: center;
+	display: none;
+}
+
+.duck-diag {
+	font-family: 'Lato', sans-serif;
+	font-weight: bold;
 	font-style: italic;
 }
 
 .ai-diag {
-	display: none;
-	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	color: pink;
 }
 
 .panel {
@@ -94,7 +103,6 @@ h1 {
 .flashback {
 	width: 200px;
 	height: 200px;
-	/*background-color: red;*/
 }
 
 #flashback1 {
