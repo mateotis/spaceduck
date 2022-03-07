@@ -1,66 +1,87 @@
-let nextDiagReady = false;
+let currentDiagLine = 0;
 let finishedPanel = 0;
-let currentPanel = 2;
+let currentPanel = 1;
 
 
 
-$(document).ready(function() {
-	$("title-screen").click(function() {
-		$("#title-screen").hide();
+$(document).ready(function() { // Click title screen, transition to panel 2
+	$("#title-screen").click(function() {
+		$("#panel1").hide();
+		$("#panel2").show();
+		finishedPanel = 1;
+		console.log("trans to panel2");
 	});
 });
 
-$(document).ready(function() {
-    $("#duck2").animate({left: "40%"}, 10000, "linear", function() {
-		$('#panel2-diag1').fadeIn();
-		nextDiagReady = true; // Enable advancing the dialogue only after the first line has appeared
-		$("#duck2").animate({left: "85%"}, 11250, "linear"); // These numbers ensure constant speed in both stages (if one changes, the other should too!)
-	});
-
-});
-
-$(document).ready(function() {
+$(document).ready(function() { // Once we're on panel 2, run duck floating animation and make first line of dialogue appear
 	$(document).click(function() {
-		if(nextDiagReady == true) {
-			$("#panel2-diag1").fadeOut(function() {
-				$("#panel2-diag2").fadeIn();
-				finishedPanel = 2;
+		console.log("click!");
+		console.log(finishedPanel, currentPanel);
+		if(finishedPanel == 1 && currentPanel == 1) {
+			currentPanel = 2;
+		    $("#duck2").animate({left: "40%"}, 10000, "linear", function() {
+				console.log("in here");
+				$('#panel2-diag1').fadeIn();
+				currentDiagLine = 1; // Enable advancing the dialogue only after the first line has appeared
+				$("#duck2").animate({left: "85%"}, 11250, "linear"); // These numbers ensure constant speed in both stages (if one changes, the other should too!)
 			});
 		}
 	});
 });
 
 
-if(finishedPanel == 3 && currentPanel == 3) {
 
-  $(document).ready(function() {
-  	$(document).click(function() {
+$(document).ready(function() { // Transition between panels
+	$(document).click(function() {
+		if(finishedPanel == 2 && currentPanel == 2) {
+			$("#panel2").hide();
+			$("#panel3").show();
+			currentPanel = 3;
+			console.log('trans to panel3');
+		}
+		else if(finishedPanel == 5 && currentPanel == 5) {
+			console.log('trans to panel6');
+			$("#panel3").hide();
+			$("#panel6").show();
+			currentPanel = 6;
+		}
+	});
+});
 
-        console.log('trans to panel6');
-  			$("#panel3").hide();
-  			$("#panel6").show();
-  			//$("#duck2").remove();
-  			//$("#panel3").append("<img class = 'duck' id = 'duck3' src = 'duck.png' width = '200' height = '100'>")
-  			currentPanel = 6;
-  	});
-  });
-}
+$(document).ready(function() { // Trigger next line of dialogue
+	$(document).click(function() {
+		if(currentDiagLine == 1) {
+			$("#panel2-diag1").fadeOut(function() {
+				$("#panel2-diag2").fadeIn();
+			});
+			console.log("2nd line appeared");
+			currentDiagLine = 2;
+		}
+		else if(currentDiagLine == 2) {
+			$("#panel2-diag2").fadeOut(function() {
+				$("#panel2-diag3").fadeIn();
+			});
+			console.log("3rd line appeared");
+			finishedPanel = 2;
+			currentDiagLine = 3;
+		}
+	});
+});
 
-if(finishedPanel == 2 && currentPanel == 2) {
-  $(document).ready(function() {
-  	$(document).click(function() {
 
-        console.log('trans to panel3');
-  			$("#panel2").hide();
-  			$("#panel3").show();
-  			//$("#duck2").remove();
-  			//$("#panel3").append("<img class = 'duck' id = 'duck3' src = 'duck.png' width = '200' height = '100'>")
-  			currentPanel = 3;
-        finishedPanel = 3;
 
-  	});
-  });
-}
+
+
+// $(document).ready(function() {
+// 	$(document).click(function() {
+// 		if(finishedPanel == 5 && currentPanel == 5) {
+// 			console.log('trans to panel6');
+// 			$("#panel3").hide();
+// 			$("#panel6").show();
+// 			currentPanel = 6;
+// 		}
+// 	});
+// });
 
 
 $(document).ready(function() {
@@ -170,10 +191,3 @@ $(document).ready(function() {
 //     $("#panel4").show();
 //   });
 // });
-
-$(document).ready(function() {
-	$("#title-screen").click(function() {
-		$("#panel1").hide();
-		$("#panel2").show();
-	});
-});
