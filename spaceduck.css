@@ -172,3 +172,12 @@ position: fixed;
 	text-align: center;
 	display: none;
 }
+
+.panel5{
+	color: white;
+	position: absolute;
+	width: 100%;
+	left: 0px;
+	text-align: center;
+	display: none;
+}
