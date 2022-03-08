@@ -2,7 +2,6 @@ body {
 	background-color: black;
 	margin: 0;
 	padding: 0;
-	/*overflow: hidden;*/
 }
 
 p {
@@ -10,12 +9,7 @@ p {
 	font-size: 1.5em;
 }
 
-h1 {
-	color: #F28C28;
-	text-align: center;
-}
-
-#title-screen {
+#title-screen { /* Center title screen horizontally */
 	display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +17,6 @@ h1 {
 	margin-top: 15%;
     width: 40%;
 	height: 40%;
-
 }
 
 #end-screen {
@@ -31,10 +24,6 @@ h1 {
     justify-content: center;
     align-items: center;
 	margin: auto;
-	/*margin-top: 10%;
-    width: 25%;
-	height: 25%;*/
-
 }
 
 .end-img {
@@ -45,14 +34,13 @@ h1 {
 
 #comic {
 	background-color: black;
-
 }
 
 .duck {
 	padding: 0;
 	margin: 0;
 	vertical-align: top;
-	width: 150px;
+	width: 150px; /* Almost the only statically sized element - everything else uses relative measurements */
 	height: 150px;
 }
 
@@ -64,13 +52,13 @@ h1 {
 }
 
 #duck3 {
-	transition-duration: 2000ms;
+	transition-duration: 2000ms; /* The transition styling makes it so that the duck trails the cursor rather than sticking to it */
     transition-timing-function: ease-out;
     position: fixed;
     transform: translate(-10%, -10%);
 }
 
-.diag {
+.diag { /* This class is shared by the dialogue of both characters and stores their common elements - modularity, baby! */
 	position: absolute;
 	width: 100%;
 	left: 0px;
@@ -78,14 +66,14 @@ h1 {
 	display: none;
 }
 
-.duck-diag {
+.duck-diag { /* There are some visible differences in the dialogue, to differentiate between the characters */
 	font-family: 'Lato', sans-serif;
 	font-weight: bold;
 	font-style: italic;
 }
 
 .ai-diag {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Roboto', sans-serif; /* Get it? Roboto? */
 	font-weight: bold;
 	color: pink;
 }
@@ -94,26 +82,28 @@ h1 {
 	position: relative;
 	width: 100%;
 	height: 100vh;
-	/*overflow: hidden;*/
 	background-image: url("space.jpg");
 
-	display: none;
+	display: none; /* Hide all panels at the start; we make them appear one by one with jQuery */
 }
 
 #panel1 {
 	position: relative;
 	width: 98%;
 	height: 99vh;
-	border-style: solid;
 	overflow: hidden;
 
-	display: block;
+	display: block; /* By "all" I meant "all but the first one", obviously */
+}
+
+#panel2 {
+	overflow: hidden; /* If left be, our little duck will fly off screen - this is intentional, but we won't break the immersion with a scrollbar */
 }
 
 .flashbacks {
 	display: flex;
 	margin: auto;
-	justify-content: space-between;
+	justify-content: space-between; /* Space out the flashback prompts on the screen */
 	align-items: center;
 	width: 100%;
 	height: 100%;
@@ -125,7 +115,7 @@ h1 {
 }
 
 #flashback2 {
-	margin-top: -20%;
+	margin-top: -20%; /* Some individual styling to place them higher/lower on the screen */
 }
 
 #flashback3 {
@@ -135,7 +125,7 @@ h1 {
 .fb-prompt {
 	height: 100%;
 	width: 100%;
-	object-fit: contain;
+	object-fit: contain; /* Very handy style; keeps the gifs from overflowing the div boundaries */
 }
 
 .fb-images {
@@ -145,8 +135,7 @@ h1 {
 }
 
 .fb-img {
-	flex: 33.33%;
-
+	flex: 33.33%; /* Each of the flashbacks take up a third of the screen width, to make for a more classic comic feel */
 	width: 33vw;
 	height: 100%;
 
@@ -156,31 +145,21 @@ h1 {
 	-webkit-transition: opacity 2s ease-in-out;
 }
 
-/*Duck for panel 4*/
-#duck4{
+/* A faster duck for panel 4 */
+#duck4 {
 transition-duration: 190ms;
-	transition-timing-function: ease-out;
-	position: fixed;
-	transform: translate(-10%, -10%);
-}
-
-.ast-img{
-	width: 70px;
-height:70px;
+transition-timing-function: ease-out;
 position: fixed;
+transform: translate(-10%, -10%);
 }
 
+.ast-img {
+	width: 70px;
+	height: 70px;
+	position: fixed;
+}
 
-/* .panel5{
-	color: white;
-	position: absolute;
-	width: 100%;
-	left: 0px;
-	text-align: center;
-	display: none;
-} */
-
-#panel5 {
+#panel5 { /* No need for the space background here */
 	background-image: none;
 }
 
@@ -189,14 +168,10 @@ position: fixed;
   justify-content: center;
   align-items: center;
   width: 100%;
-  flex-direction: column;
+  flex-direction: column; /* We also use flexbox here; this time to space out the journey gifs vertically */
   background-image: none;
 }
 
-
-
 .scroll-img {
-	/*width: 20vw;
-	height: 20vh;*/
 	margin-bottom: 15%;
 }

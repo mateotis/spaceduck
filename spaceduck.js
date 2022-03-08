@@ -3,7 +3,6 @@ let finishedPanel = 0;
 let currentPanel = 1;
 let flashbacksSeen = new Array(3).fill(false);
 
-
 $(document).ready(function() { // Click title screen, transition to panel 2
 	$("#title-screen").click(function() {
 		finishedPanel = 1;
@@ -14,15 +13,11 @@ $(document).ready(function() { // Click title screen, transition to panel 2
 	});
 });
 
-
 $(document).ready(function() { // Once we're on panel 2, run duck floating animation and make first line of dialogue appear
 	$(document).click(function() {
-		console.log("click!");
-		console.log(finishedPanel, currentPanel);
 		if(finishedPanel == 1 && currentPanel == 1) {
 			currentPanel = 2;
 		    $("#duck2").animate({left: "40%"}, 10000, "linear", function() {
-				console.log("in here");
 				$('#panel2-diag1').fadeIn();
 				currentDiagLine = 1; // Enable advancing the dialogue only after the first line has appeared
 				$("#duck2").animate({left: "100%"}, 15000, "linear"); // These numbers ensure constant speed in both stages (if one changes, the other should too!)
@@ -32,29 +27,25 @@ $(document).ready(function() { // Once we're on panel 2, run duck floating anima
 });
 
 
-
 $(document).ready(function() { // Transition between panels
 	$(document).click(function() {
-		if(finishedPanel == 2 && currentPanel == 2) {
+		if(finishedPanel == 2 && currentPanel == 2) { // Progress from panel to panel is controlled by these two variables, which we set throughout various JS events
 			currentPanel = 3;
-			$("#panel2").fadeOut(function() {
+			$("#panel2").fadeOut(function() { // We use the fadeout + callback function combo to make for smooth, cinematic transitions
 				$("#panel3").show();
-				console.log('trans to panel3');
 			});
 		}
 		else if(finishedPanel == 3 && currentPanel == 3) {
 			currentPanel = 4;
 			$("#panel3").fadeOut(function() {
 				$("#panel4").show();
-				console.log('trans to panel4');
 			});
 		}
 		else if(finishedPanel == 4 && currentPanel == 4) {
 			currentPanel = 5;
-			console.log('trans to panel4');
 			$("#panel4").fadeOut(function() {
 				$("#panel5").show(function() {
-					$("#journey1").fadeIn(function() {
+					$("#journey1").fadeIn(function() { // Chaining callbacks like this gives the journey gifs a left fade look
 						$("#journey2").fadeIn(function() {
 							$("#journey3").fadeIn(function() {
 							});
@@ -67,13 +58,12 @@ $(document).ready(function() { // Transition between panels
 			currentPanel = 6;
 			$("#panel5").fadeOut(function() {
 				$("#panel6").show();
-				console.log('trans to panel6');
 			});
 		}
 	});
 });
 
-$(document).ready(function() { // Trigger next line of dialogue
+$(document).ready(function() { // Trigger next line of dialogue (only for panel 2)
 	$(document).click(function() {
 		if(currentPanel == 2) {
 			if(currentDiagLine == 1) {
@@ -90,37 +80,11 @@ $(document).ready(function() { // Trigger next line of dialogue
 				currentDiagLine = 3;
 			}
 		}
-		// else if(currentPanel == 3) {
-		// 	if(currentDiagLine == 3) {
-		// 		$("#panel3-diag1").fadeIn();
-		// 		currentDiagLine = 4;
-		// 	}
-		// }
-
 	});
 });
 
-
- //RUBBISH
-// $(document).ready(function() { // Trigger next line of dialogue
-// 	$(document).click(function() {
-// 		if(currentPanel == 4) {
-// 			$("#panel4-diag1").fadeIn()
-// 		};
-// 				currentDiagLine = 1;
-// 			});
-// 		});
-// 		 if(currentDiagLine == 1) {
-// 				$("#panel4-diag1").fadeOut(function() {
-// 					$("#panel4-diag2").fadeIn();
-// 				});
-// 				finishedPanel = 4;
-// 				currentDiagLine = 2;
-// 			};
-
-
 $(document).ready(function() {
-	$(document).on('mousemove', (event) => { // Making the duck follow our cursor (within bounds)
+	$(document).on('mousemove', (event) => { // Making the duck follow our cursor
 		$('#duck3').css({
 			left: event.clientX,
 			top: event.clientY,
@@ -133,9 +97,10 @@ $(document).ready(function() {
 
 		if(currentPanel == 3) {
 
-			let offset1 = $("#flashback1").offset();
-			let fbHeight1 = $("#flashback1").height();
-			let fbWidth1 = $("#flashback1").width();
+			// Keep track of all our boundaries - there are a lot!
+			let offset1 = $("#flashback1").offset(); // Where is the element relative to the top-left of the page
+			let fbHeight1 = $("#flashback1").height(); // Element height
+			let fbWidth1 = $("#flashback1").width(); // Element width
 
 			let offset2 = $("#flashback2").offset();
 			let fbHeight2 = $("#flashback2").height();
@@ -145,12 +110,9 @@ $(document).ready(function() {
 			let fbHeight3 = $("#flashback3").height();
 			let fbWidth3 = $("#flashback3").width();
 
-			//console.log(event.clientX, event.clientY);
-			//console.log("Offset:", offset, "Height:", fbHeight, "Width:", fbWidth);
-
-			if(offset1.left < event.clientX && event.clientX < (offset1.left + fbWidth1) && offset1.top < event.clientY && event.clientY < (offset1.top + fbHeight1)) {
+			if(offset1.left < event.clientX && event.clientX < (offset1.left + fbWidth1) && offset1.top < event.clientY && event.clientY < (offset1.top + fbHeight1)) { // The actual math - all these relations together ensure that our mouse is within said flashback prompt before triggering the flashback
 				flashbacksSeen[0] = true; // Track which flashbacks we've visited
-				$('#fb-img1').css("opacity","0.8");
+				$('#fb-img1').css("opacity","0.8"); // Only set to 0.8 opacity for that "memory" feeling
 			}
 			else {
 				$('#fb-img1').css("opacity", "0");
@@ -162,7 +124,6 @@ $(document).ready(function() {
 			}
 			else {
 				$('#fb-img2').css("opacity","0");
-				//$('#fb-img2').fadeOut();
 			}
 
 			if(offset3.left < event.clientX && event.clientX < (offset3.left + fbWidth3) && offset3.top < event.clientY && event.clientY < (offset3.top + fbHeight3)) {
@@ -176,7 +137,7 @@ $(document).ready(function() {
 			let progCheck = flashbacksSeen.every(Boolean); // Fancy JS syntax to check whether all elements in the list are true - if they are, we've seen every flashback at least once
 			if(progCheck == true) {
 				finishedPanel = 3; // Which means we're done with this panel!
-				$("#panel3-diag1").fadeIn();
+				$("#panel3-diag1").fadeIn(); // Let the reader know
 				currentDiagLine = 4;
 			}
 		}
@@ -184,14 +145,10 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	$(document).on('mousemove', (event) => {
-		let goal = $("#panel4").width() * 0.85;
-
-		//console.log("Our goal is:", goal);
-		//console.log("Our mouse X pos is:", event.clientX);
+	$(document).on('mousemove', (event) => { // Trigger to leave panel 4 - get to the right edge of the screen
+		let goal = $("#panel4").width() * 0.85; // Specifically, move the mouse to the last 15% of the screen width
 
 		if(currentPanel == 4 && event.clientX > goal) {
-			console.log("Crossed the finish line!");
 			finishedPanel = 4;
 		}
 	});
@@ -199,8 +156,6 @@ $(document).ready(function() {
 
 
 //panel 4
-
-// duck followa cursor to avoid asteroids ( same as máté's, i just changed the id to fit my panel, nothing new)
 
 $(document).ready(function() {
 	$(document).on('mousemove', (event) => {
@@ -211,28 +166,28 @@ $(document).ready(function() {
 	});
 });
 
-//--  ast animation
+// Animating the asteroids
 $(document).ready(function() {
-    animateDiv($('#ast1'));
-		animateDiv($('#ast2'));
-		animateDiv($('#ast3'));
-		animateDiv($('#ast4'));
-		animateDiv($('#ast5'));
-		animateDiv($('#ast6'));
-		animateDiv($('#ast7'));
-		animateDiv($('#ast8'));
-		animateDiv($('#ast9'));
-		animateDiv($('#ast10'));
-		animateDiv($('#ast11'));
-		animateDiv($('#ast12'));
-		animateDiv($('#ast13'));
-		animateDiv($('#ast14'));
-
+	animateDiv($('#ast1'));
+	animateDiv($('#ast2'));
+	animateDiv($('#ast3'));
+	animateDiv($('#ast4'));
+	animateDiv($('#ast5'));
+	animateDiv($('#ast6'));
+	animateDiv($('#ast7'));
+	animateDiv($('#ast8'));
+	animateDiv($('#ast9'));
+	animateDiv($('#ast10'));
+	animateDiv($('#ast11'));
+	animateDiv($('#ast12'));
+	animateDiv($('#ast13'));
+	animateDiv($('#ast14'));
 });
+
 // this creates the container for the images to float in
 function makeNewPosition($panel4) {
 
-    // Get viewport dimensions (remove the dimension of the div)
+    // get viewport dimensions (remove the dimension of the div)
     var h = $panel4.height() - 50;
     var w = $panel4.width() - 50;
 
@@ -242,7 +197,8 @@ function makeNewPosition($panel4) {
     return [nh, nw];
 
 }
-// this creates the  movement
+
+// this creates the movement
 function animateDiv($target) {
     var newq = makeNewPosition($target.parent());
     var oldq = $target.offset();
@@ -272,8 +228,7 @@ function calcSpeed(prev, next) {
 
 }
 
-//panel 4 dialoge timer
-
+// makes the warning dialogue alternate automatically
 function fade() {
 	$('#panel4-diag3').fadeIn();
 	$('#panel4-diag2').fadeIn().delay(500).fadeOut(function() {
@@ -282,11 +237,9 @@ function fade() {
 }
 fade();
 
-$(window).scroll(function() {
+$(window).scroll(function() { // The trigger to leave panel 5 - scroll to the bottom
 	if(currentPanel == 5) {
-		console.log($(window).scrollTop(), $(window).height(), $(document).height());
-		if($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
-			console.log("scrolled to bottom!");
+		if($(window).scrollTop() + $(window).height() >= $(document).height() - 100) { // ...with some leeway
 			finishedPanel = 5;
 		}
 	}
