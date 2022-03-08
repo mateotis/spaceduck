@@ -83,6 +83,25 @@ $(document).ready(function() { // Trigger next line of dialogue
 	});
 });
 
+
+ //RUBBISH
+// $(document).ready(function() { // Trigger next line of dialogue
+// 	$(document).click(function() {
+// 		if(currentPanel == 4) {
+// 			$("#panel4-diag1").fadeIn()
+// 		};
+// 				currentDiagLine = 1;
+// 			});
+// 		});
+// 		 if(currentDiagLine == 1) {
+// 				$("#panel4-diag1").fadeOut(function() {
+// 					$("#panel4-diag2").fadeIn();
+// 				});
+// 				finishedPanel = 4;
+// 				currentDiagLine = 2;
+// 			};
+
+
 $(document).ready(function() {
 	$(document).on('mousemove', (event) => { // Making the duck follow our cursor (within bounds)
 		let offset = $("#panel3").offset();
@@ -234,15 +253,15 @@ function calcSpeed(prev, next) {
 
 }
 
-// panel 4 dialoge timer
+//panel 4 dialoge timer
 
 function fade() {
 			 $('#panel4-diag1').fadeIn().delay(500).fadeOut();
 			       $('#panel4-diag2').delay(5000).fadeIn().delay(5000).fadeOut(fade);
-		 }
+		 };
 fade();
 
-
-function myFunction() {
-  document.getElementById("#panel5").click();
-}
+$(document).click(function() {
+  $( "#panel4" ).hide();
+	$("panel5").show();
+});
