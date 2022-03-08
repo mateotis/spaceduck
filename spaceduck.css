@@ -7,22 +7,27 @@ body {
 
 p {
 	color: white;
-	font-size: 20px;
+	font-size: 1.5em;
 }
+
+h1 {
+	color: #F28C28;
+	text-align: center;
+}
+
 #title-screen {
-	width: 50vw;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	margin: auto;
+	margin-top: 15%;
+    width: 40%;
+	height: 40%;
 
 }
-
-/* #clicktobegin {
-	transition-duration: 2000ms;
-    transition-timing-function: ease-in;
-
-} */
-
 
 #comic {
-	background-color: darkblue;
+	background-color: black;
 
 }
 
@@ -48,15 +53,24 @@ p {
     transform: translate(-10%, -10%);
 }
 
-.duck-diag {
-	display: none;
+.diag {
+	position: absolute;
+	width: 100%;
+	left: 0px;
 	text-align: center;
+	display: none;
+}
+
+.duck-diag {
+	font-family: 'Lato', sans-serif;
+	font-weight: bold;
 	font-style: italic;
 }
 
 .ai-diag {
-	display: none;
-	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	color: pink;
 }
 
 .panel {
@@ -64,7 +78,6 @@ p {
 	width: 100%;
 	height: 100vh;
 	overflow: hidden;
-	/*border-style: solid;*/
 	background-image: url("space.jpg");
 
 	display: none;
@@ -83,13 +96,13 @@ p {
 	margin: auto;
 	justify-content: space-between;
 	align-items: center;
-	width: 80%;
+	width: 100%;
+	height: 100%;
 }
 
 .flashback {
 	width: 200px;
 	height: 200px;
-	/*background-color: red;*/
 }
 
 #flashback1 {
@@ -110,67 +123,52 @@ p {
 	object-fit: contain;
 }
 
-.fb-img {
-	display: none;
-	width: 33vw;
-	height: 50vh;
-	/* Magic! */
-	max-width: 33vw;
-}
-
-/*.flashback:hover {
-	background-color: blue;
-}
-
-.flashback:hover:after {
-	content: url(duck.png);
-
-} */
-
-/* meera*/
-
-/* this Css works on the title panel (panel1) ,i imagined the text space duck to be in the center with orange text.
-we can change it, i'll make my code as clear as possible using these comments <3 */
-
-/*To being i am starting with the title color and position,
-initally space duck was written as a paragraph, i changed it to a heading so i can play around with it's size and color.
-*/
-
-h1{
-color: #F28C28 ;
-  text-align: center;
-
-}
-/*As for position u used a div i made on html called text background */
-#title-screen {
+.fb-images {
+	margin: 0;
 	display: flex;
-    justify-content: center;
-    align-items: center;
-	background: darkblue;
-	margin: auto;
-	margin-top: 15%;
-    width: 25%;
-	height: 25%;
-
-}
-/* THESE ARE FOR THE BUTTONS, it's the positionof each button <3*/
-#MTP0{
-margin-left: 47%;
+	position: absolute;
 }
 
-#MTP1{
-	margin-left: 48%;
-	margin-top: 205px
+.fb-img {
+	flex: 33.33%;
+
+	width: 33vw;
+	height: 100%;
+
+	opacity: 0;
+	transition: opacity 2s ease-in-out; /* 2 sec fade in/out animation that is triggered when the opacity is changed */
+	-moz-transition: opacity 2s ease-in-out; /* For portability */
+	-webkit-transition: opacity 2s ease-in-out;
 }
 
-#MTP12{
-	margin-left: 48%;
-transform: translateY(770%);
+/*Duck for panel 4*/
+#duck4{
+transition-duration: 190ms;
+	transition-timing-function: ease-out;
+	position: fixed;
+	transform: translate(-10%, -10%);
 }
 
-
-#MTP3{
-	margin-left: 48%;
-transform: translateY(770%);
+.ast-img{
+	width: 70px;
+height:70px;
+position: fixed;
 }
-/* next i want to include the chaining effect for the panels in java */
+
+#panel4-diag1{
+	color: orange;
+	position: absolute;
+	width: 100%;
+	left: 0px;
+	text-align: center;
+	display: none;
+}
+
+#panel4-diag2{
+		color: orange;
+	position: absolute;
+	width: 100%;
+	left: 0px;
+	text-align: center;
+	display: none;
+}
