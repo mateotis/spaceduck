@@ -1,3 +1,5 @@
+AOS.init();
+
 let currentDiagLine = 0;
 let finishedPanel = 0;
 let currentPanel = 1;
@@ -42,16 +44,32 @@ $(document).ready(function() { // Transition between panels
 			});
 		}
 		else if(finishedPanel == 3 && currentPanel == 3) {
-			$("#panel3").hide();
-			$("#panel4").show();
 			currentPanel = 4;
-			console.log('trans to panel4');
+			$("#panel3").fadeOut(function() {
+				$("#panel4").show();
+				console.log('trans to panel4');
+			});
+		}
+		else if(finishedPanel == 4 && currentPanel == 4) {
+			currentPanel = 5;
+			$("#panel4").fadeOut(function() {
+				$("#panel5").show();
+				console.log('trans to panel4');
+			});
 		}
 		else if(finishedPanel == 5 && currentPanel == 5) {
-			console.log('trans to panel6');
-			$("#panel3").hide();
-			$("#panel6").show();
 			currentPanel = 6;
+			$("#panel5").fadeOut(function() {
+				$("#panel6").show();
+				console.log('trans to panel6');
+			});
+		}
+		else if(finishedPanel == 6 && currentPanel == 6) {
+			currentPanel = 1;
+			$("#panel6").fadeOut(function() {
+				$("#panel1").show();
+				console.log('trans back to panel1');
+			});
 		}
 	});
 });
@@ -104,18 +122,10 @@ $(document).ready(function() { // Trigger next line of dialogue
 
 $(document).ready(function() {
 	$(document).on('mousemove', (event) => { // Making the duck follow our cursor (within bounds)
-		let offset = $("#panel3").offset();
-		let panelHeight = $("#panel3").height();
-		let duckHeight = $("#duck3").height();
-		let panelWidth = $("#panel3").width();
-		let duckWidth = $("#duck3").width();
-		if(event.clientX < (panelWidth - duckWidth) && offset.top < event.clientY && event.clientY < (offset.top + panelHeight - duckHeight)) {
-			$('#duck3').css({
-				left: event.clientX,
-				top: event.clientY,
-			});
-		}
-
+		$('#duck3').css({
+			left: event.clientX,
+			top: event.clientY,
+		});
 	});
 });
 
@@ -170,6 +180,20 @@ $(document).ready(function() {
 	});
 });
 
+$(document).ready(function() {
+	$(document).on('mousemove', (event) => {
+		let goal = $("#panel4").width() * 0.85;
+
+		//console.log("Our goal is:", goal);
+		//console.log("Our mouse X pos is:", event.clientX);
+
+		if(event.clientX > goal) {
+			console.log("Crossed the finish line!");
+			finishedPanel = 4;
+		}
+	});
+});
+
 
 //panel 4
 
@@ -177,18 +201,10 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$(document).on('mousemove', (event) => {
-		let offset = $("#panel4").offset();
-		let panelHeight = $("#panel4").height();
-		let duckHeight = $("#duck4").height();
-		let panelWidth = $("#panel4").width();
-		let duckWidth = $("#duck4").width();
-		if(event.clientX < (panelWidth - duckWidth) && offset.top < event.clientY && event.clientY < (offset.top + panelHeight - duckHeight)) {
-			$('#duck4').css({
-				left: event.clientX,
-				top: event.clientY,
-			});
-		}
-
+		$('#duck4').css({
+			left: event.clientX,
+			top: event.clientY,
+		});
 	});
 });
 
@@ -256,12 +272,8 @@ function calcSpeed(prev, next) {
 //panel 4 dialoge timer
 
 function fade() {
-			 $('#panel4-diag1').fadeIn().delay(500).fadeOut();
-			       $('#panel4-diag2').delay(5000).fadeIn().delay(5000).fadeOut(fade);
-		 };
+	$('#panel4-diag2').fadeIn().delay(500).fadeOut(function() {
+		$('#panel4-diag1').fadeIn().delay(500).fadeOut(fade);
+	});
+}
 fade();
-
-$(document).click(function() {
-  $( "#panel4" ).hide();
-	$("panel5").show();
-});
