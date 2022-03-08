@@ -1,5 +1,3 @@
-AOS.init();
-
 let currentDiagLine = 0;
 let finishedPanel = 0;
 let currentPanel = 1;
@@ -16,13 +14,14 @@ $(document).ready(function() { // Click title screen, transition to panel 2
 	});
 });
 
+
 $(document).ready(function() { // Once we're on panel 2, run duck floating animation and make first line of dialogue appear
 	$(document).click(function() {
 		console.log("click!");
 		console.log(finishedPanel, currentPanel);
 		if(finishedPanel == 1 && currentPanel == 1) {
 			currentPanel = 2;
-		    $("#duck2").animate({left: "40%"}, 1000, "linear", function() {
+		    $("#duck2").animate({left: "40%"}, 10000, "linear", function() {
 				console.log("in here");
 				$('#panel2-diag1').fadeIn();
 				currentDiagLine = 1; // Enable advancing the dialogue only after the first line has appeared
@@ -52,9 +51,16 @@ $(document).ready(function() { // Transition between panels
 		}
 		else if(finishedPanel == 4 && currentPanel == 4) {
 			currentPanel = 5;
+			console.log('trans to panel4');
 			$("#panel4").fadeOut(function() {
-				$("#panel5").show();
-				console.log('trans to panel4');
+				$("#panel5").show(function() {
+					$("#journey1").fadeIn(function() {
+						$("#journey2").fadeIn(function() {
+							$("#journey3").fadeIn(function() {
+							});
+						});
+					});
+				});
 			});
 		}
 		else if(finishedPanel == 5 && currentPanel == 5) {
@@ -62,13 +68,6 @@ $(document).ready(function() { // Transition between panels
 			$("#panel5").fadeOut(function() {
 				$("#panel6").show();
 				console.log('trans to panel6');
-			});
-		}
-		else if(finishedPanel == 6 && currentPanel == 6) {
-			currentPanel = 1;
-			$("#panel6").fadeOut(function() {
-				$("#panel1").show();
-				console.log('trans back to panel1');
 			});
 		}
 	});
@@ -131,51 +130,55 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$(document).on('mousemove', (event) => { // Flashback hitbox tracking, making them appear/disappear
-		let offset1 = $("#flashback1").offset();
-		let fbHeight1 = $("#flashback1").height();
-		let fbWidth1 = $("#flashback1").width();
 
-		let offset2 = $("#flashback2").offset();
-		let fbHeight2 = $("#flashback2").height();
-		let fbWidth2 = $("#flashback2").width();
+		if(currentPanel == 3) {
 
-		let offset3 = $("#flashback3").offset();
-		let fbHeight3 = $("#flashback3").height();
-		let fbWidth3 = $("#flashback3").width();
+			let offset1 = $("#flashback1").offset();
+			let fbHeight1 = $("#flashback1").height();
+			let fbWidth1 = $("#flashback1").width();
 
-		//console.log(event.clientX, event.clientY);
-		//console.log("Offset:", offset, "Height:", fbHeight, "Width:", fbWidth);
+			let offset2 = $("#flashback2").offset();
+			let fbHeight2 = $("#flashback2").height();
+			let fbWidth2 = $("#flashback2").width();
 
-		if(offset1.left < event.clientX && event.clientX < (offset1.left + fbWidth1) && offset1.top < event.clientY && event.clientY < (offset1.top + fbHeight1)) {
-			flashbacksSeen[0] = true; // Track which flashbacks we've visited
-			$('#fb-img1').css("opacity","0.8");
-		}
-		else {
-			$('#fb-img1').css("opacity", "0");
-		}
+			let offset3 = $("#flashback3").offset();
+			let fbHeight3 = $("#flashback3").height();
+			let fbWidth3 = $("#flashback3").width();
 
-		if(offset2.left < event.clientX && event.clientX < (offset2.left + fbWidth2) && offset2.top < event.clientY && event.clientY < (offset2.top + fbHeight2)) {
-			flashbacksSeen[1] = true;
-			$('#fb-img2').css("opacity","0.8");
-		}
-		else {
-			$('#fb-img2').css("opacity","0");
-			//$('#fb-img2').fadeOut();
-		}
+			//console.log(event.clientX, event.clientY);
+			//console.log("Offset:", offset, "Height:", fbHeight, "Width:", fbWidth);
 
-		if(offset3.left < event.clientX && event.clientX < (offset3.left + fbWidth3) && offset3.top < event.clientY && event.clientY < (offset3.top + fbHeight3)) {
-			flashbacksSeen[2] = true;
-			$('#fb-img3').css("opacity","0.8");
-		}
-		else {
-			$('#fb-img3').css("opacity","0");
-		}
+			if(offset1.left < event.clientX && event.clientX < (offset1.left + fbWidth1) && offset1.top < event.clientY && event.clientY < (offset1.top + fbHeight1)) {
+				flashbacksSeen[0] = true; // Track which flashbacks we've visited
+				$('#fb-img1').css("opacity","0.8");
+			}
+			else {
+				$('#fb-img1').css("opacity", "0");
+			}
 
-		let progCheck = flashbacksSeen.every(Boolean); // Fancy JS syntax to check whether all elements in the list are true - if they are, we've seen every flashback at least once
-		if(progCheck == true) {
-			finishedPanel = 3; // Which means we're done with this panel!
-			$("#panel3-diag1").fadeIn();
-			currentDiagLine = 4;
+			if(offset2.left < event.clientX && event.clientX < (offset2.left + fbWidth2) && offset2.top < event.clientY && event.clientY < (offset2.top + fbHeight2)) {
+				flashbacksSeen[1] = true;
+				$('#fb-img2').css("opacity","0.8");
+			}
+			else {
+				$('#fb-img2').css("opacity","0");
+				//$('#fb-img2').fadeOut();
+			}
+
+			if(offset3.left < event.clientX && event.clientX < (offset3.left + fbWidth3) && offset3.top < event.clientY && event.clientY < (offset3.top + fbHeight3)) {
+				flashbacksSeen[2] = true;
+				$('#fb-img3').css("opacity","0.8");
+			}
+			else {
+				$('#fb-img3').css("opacity","0");
+			}
+
+			let progCheck = flashbacksSeen.every(Boolean); // Fancy JS syntax to check whether all elements in the list are true - if they are, we've seen every flashback at least once
+			if(progCheck == true) {
+				finishedPanel = 3; // Which means we're done with this panel!
+				$("#panel3-diag1").fadeIn();
+				currentDiagLine = 4;
+			}
 		}
 	});
 });
@@ -187,7 +190,7 @@ $(document).ready(function() {
 		//console.log("Our goal is:", goal);
 		//console.log("Our mouse X pos is:", event.clientX);
 
-		if(event.clientX > goal) {
+		if(currentPanel == 4 && event.clientX > goal) {
 			console.log("Crossed the finish line!");
 			finishedPanel = 4;
 		}
@@ -272,8 +275,19 @@ function calcSpeed(prev, next) {
 //panel 4 dialoge timer
 
 function fade() {
+	$('#panel4-diag3').fadeIn();
 	$('#panel4-diag2').fadeIn().delay(500).fadeOut(function() {
 		$('#panel4-diag1').fadeIn().delay(500).fadeOut(fade);
 	});
 }
 fade();
+
+$(window).scroll(function() {
+	if(currentPanel == 5) {
+		console.log($(window).scrollTop(), $(window).height(), $(document).height());
+		if($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+			console.log("scrolled to bottom!");
+			finishedPanel = 5;
+		}
+	}
+});
