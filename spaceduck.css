@@ -159,8 +159,9 @@ transform: translate(-10%, -10%);
 	position: fixed;
 }
 
-#panel5 { /* No need for the space background here */
-	background-image: none;
+#panel5 {
+	height: 100%;
+	background-image: linear-gradient(black, blue, cyan); /* Instead of the space background, we have a black to cyan gradient to show the duck coming down from space into the water :) */
 }
 
 .journey {

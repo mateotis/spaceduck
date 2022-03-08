@@ -85,10 +85,19 @@ $(document).ready(function() { // Trigger next line of dialogue (only for panel 
 
 $(document).ready(function() {
 	$(document).on('mousemove', (event) => { // Making the duck follow our cursor
-		$('#duck3').css({
-			left: event.clientX,
-			top: event.clientY,
-		});
+
+		if(currentPanel == 3) {
+			$('#duck3').css({
+				left: event.clientX,
+				top: event.clientY,
+			});
+		}
+		else if(currentPanel == 4) {
+			$('#duck4').css({
+				left: event.clientX,
+				top: event.clientY,
+			});
+		}
 	});
 });
 
@@ -154,19 +163,7 @@ $(document).ready(function() {
 	});
 });
 
-
-//panel 4
-
-$(document).ready(function() {
-	$(document).on('mousemove', (event) => {
-		$('#duck4').css({
-			left: event.clientX,
-			top: event.clientY,
-		});
-	});
-});
-
-// Animating the asteroids
+// animating the asteroids for panel 4
 $(document).ready(function() {
 	animateDiv($('#ast1'));
 	animateDiv($('#ast2'));
