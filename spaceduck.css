@@ -140,3 +140,35 @@ h1 {
 	-moz-transition: opacity 2s ease-in-out; /* For portability */
 	-webkit-transition: opacity 2s ease-in-out;
 }
+
+/*Duck for panel 4*/
+#duck4{
+transition-duration: 190ms;
+	transition-timing-function: ease-out;
+	position: fixed;
+	transform: translate(-10%, -10%);
+}
+
+.ast-img{
+	width: 70px;
+height:70px;
+position: fixed;
+}
+
+#panel4-diag1{
+	color: orange;
+	position: absolute;
+	width: 100%;
+	left: 0px;
+	text-align: center;
+	display: none;
+}
+
+#panel4-diag2{
+		color: orange;
+	position: absolute;
+	width: 100%;
+	left: 0px;
+	text-align: center;
+	display: none;
+}

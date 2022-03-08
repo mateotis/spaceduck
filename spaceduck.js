@@ -150,3 +150,99 @@ $(document).ready(function() {
 		}
 	});
 });
+
+
+//panel 4
+
+// duck followa cursor to avoid asteroids ( same as máté's, i just changed the id to fit my panel, nothing new)
+
+$(document).ready(function() {
+	$(document).on('mousemove', (event) => {
+		let offset = $("#panel4").offset();
+		let panelHeight = $("#panel4").height();
+		let duckHeight = $("#duck4").height();
+		let panelWidth = $("#panel4").width();
+		let duckWidth = $("#duck4").width();
+		if(event.clientX < (panelWidth - duckWidth) && offset.top < event.clientY && event.clientY < (offset.top + panelHeight - duckHeight)) {
+			$('#duck4').css({
+				left: event.clientX,
+				top: event.clientY,
+			});
+		}
+
+	});
+});
+
+//--  ast animation
+$(document).ready(function() {
+    animateDiv($('#ast1'));
+		animateDiv($('#ast2'));
+		animateDiv($('#ast3'));
+		animateDiv($('#ast4'));
+		animateDiv($('#ast5'));
+		animateDiv($('#ast6'));
+		animateDiv($('#ast7'));
+		animateDiv($('#ast8'));
+		animateDiv($('#ast9'));
+		animateDiv($('#ast10'));
+		animateDiv($('#ast11'));
+		animateDiv($('#ast12'));
+		animateDiv($('#ast13'));
+		animateDiv($('#ast14'));
+
+});
+// this creates the container for the images to float in
+function makeNewPosition($panel4) {
+
+    // Get viewport dimensions (remove the dimension of the div)
+    var h = $panel4.height() - 50;
+    var w = $panel4.width() - 50;
+
+    var nh = Math.floor(Math.random() * h);
+    var nw = Math.floor(Math.random() * w);
+
+    return [nh, nw];
+
+}
+// this creates the  movement
+function animateDiv($target) {
+    var newq = makeNewPosition($target.parent());
+    var oldq = $target.offset();
+    var speed = calcSpeed([oldq.top, oldq.left], newq);
+
+    $target.animate({
+        top: newq[0],
+        left: newq[1]
+    }, speed, function() {
+        animateDiv($target);
+    });
+
+};
+// this is for speed
+function calcSpeed(prev, next) {
+
+    var x = Math.abs(prev[1] - next[1]);
+    var y = Math.abs(prev[0] - next[0]);
+
+    var greatest = x > y ? x : y;
+
+    var speedModifier = 0.1;
+
+    var speed = Math.ceil(greatest / speedModifier);
+
+    return speed;
+
+}
+
+// panel 4 dialoge timer
+
+function fade() {
+			 $('#panel4-diag1').fadeIn().delay(500).fadeOut();
+			       $('#panel4-diag2').delay(5000).fadeIn().delay(5000).fadeOut(fade);
+		 }
+fade();
+
+
+function myFunction() {
+  document.getElementById("#panel5").click();
+}
